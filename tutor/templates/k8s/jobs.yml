@@ -38,8 +38,8 @@ spec:
         configMap:
           name: openedx-config
       - name: mongodb-cert
-          secret:
-            secretName: mongodb-ca
+        secret:
+          secretName: mongodb-ca
 ---
 apiVersion: batch/v1
 kind: Job
@@ -80,8 +80,8 @@ spec:
         configMap:
           name: openedx-config
       - name: mongodb-cert
-          secret:
-            secretName: mongodb-ca
+        secret:
+          secretName: mongodb-ca
 ---
 apiVersion: batch/v1
 kind: Job
