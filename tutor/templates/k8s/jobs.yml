@@ -27,6 +27,9 @@ spec:
           - mountPath: /mongo-db-cert/mongodb-ca-cert
             name: mongodb-cert
             subPath: mongodb-ca-cert
+          - mountPath: /mongo-db-cert/client-pem
+            name: mongodb-cert
+            subPath: client-pem
       volumes:
       - name: settings-lms
         configMap:
@@ -69,6 +72,9 @@ spec:
           - mountPath: /mongo-db-cert/mongodb-ca-cert
             name: mongodb-cert
             subPath: mongodb-ca-cert
+          - mountPath: /mongo-db-cert/client-pem
+            name: mongodb-cert
+            subPath: client-pem
       volumes:
       - name: settings-lms
         configMap:
