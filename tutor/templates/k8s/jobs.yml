@@ -24,6 +24,9 @@ spec:
             name: settings-cms
           - mountPath: /openedx/config
             name: config
+          - mountPath: /mongo-db-cert/mongodb-ca-cert
+            name: mongodb-cert
+            subPath: mongodb-ca-cert
       volumes:
       - name: settings-lms
         configMap:
@@ -34,6 +37,9 @@ spec:
       - name: config
         configMap:
           name: openedx-config
+      - name: mongodb-cert
+          secret:
+            secretName: mongodb-ca
 ---
 apiVersion: batch/v1
 kind: Job
@@ -60,6 +66,9 @@ spec:
             name: settings-cms
           - mountPath: /openedx/config
             name: config
+          - mountPath: /mongo-db-cert/mongodb-ca-cert
+            name: mongodb-cert
+            subPath: mongodb-ca-cert
       volumes:
       - name: settings-lms
         configMap:
@@ -70,6 +79,9 @@ spec:
       - name: config
         configMap:
           name: openedx-config
+      - name: mongodb-cert
+          secret:
+            secretName: mongodb-ca
 ---
 apiVersion: batch/v1
 kind: Job
