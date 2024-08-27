@@ -89,6 +89,7 @@ spec:
         secret:
           secretName: mongodb-ca
 ---
+{ %- if MYSQL_SKIP_INITIATION % }
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -102,5 +103,5 @@ spec:
       containers:
       - name: mysql
         image: {{ DOCKER_IMAGE_MYSQL }}
-
+{ %- endif % }
 {{ patch("k8s-jobs") }}
