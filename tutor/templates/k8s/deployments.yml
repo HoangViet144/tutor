@@ -100,14 +100,14 @@ spec:
             - mountPath: /openedx/uwsgi.ini
               name: uwsgi-config
               subPath: uwsgi.ini
-            { %- if MONGODB_USE_CUSTOM_SSL_CERT % }
+            {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
             - mountPath: /mongo-db-cert/mongodb-ca-cert
               name: mongodb-cert
               subPath: mongodb-ca-cert
             - mountPath: /mongo-db-cert/client-pem
               name: mongodb-cert
               subPath: client-pem
-            { %- endif % }
+            {%- endif %}
           resources:
             requests:
               memory: 2Gi
@@ -129,11 +129,11 @@ spec:
             items:
               - key: uwsgi.ini
                 path: uwsgi.ini
-        { %- if MONGODB_USE_CUSTOM_SSL_CERT % }
+        {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
         - name: mongodb-cert
           secret:
             secretName: mongodb-ca
-        { %- endif % }
+        {%- endif %}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -169,14 +169,14 @@ spec:
               name: settings-cms
             - mountPath: /openedx/config
               name: config
-            { %- if MONGODB_USE_CUSTOM_SSL_CERT % }
+            {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
             - mountPath: /mongo-db-cert/mongodb-ca-cert
               name: mongodb-cert
               subPath: mongodb-ca-cert
             - mountPath: /mongo-db-cert/client-pem
               name: mongodb-cert
               subPath: client-pem
-            { %- endif % }
+            {%- endif %}
           securityContext:
             allowPrivilegeEscalation: false
       volumes:
@@ -189,11 +189,11 @@ spec:
         - name: config
           configMap:
             name: openedx-config
-        { %- if MONGODB_USE_CUSTOM_SSL_CERT % }
+        {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
         - name: mongodb-cert
           secret:
             secretName: mongodb-ca
-        { %- endif % }
+        {%- endif %}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -235,14 +235,14 @@ spec:
             - mountPath: /openedx/uwsgi.ini
               name: uwsgi-config
               subPath: uwsgi.ini
-            { %- if MONGODB_USE_CUSTOM_SSL_CERT % }
+            {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
             - mountPath: /mongo-db-cert/mongodb-ca-cert
               name: mongodb-cert
               subPath: mongodb-ca-cert
             - mountPath: /mongo-db-cert/client-pem
               name: mongodb-cert
               subPath: client-pem
-            { %- endif % }
+            {%- endif %}
           resources:
             requests:
               memory: 2Gi
@@ -264,11 +264,11 @@ spec:
             items:
             - key: uwsgi.ini
               path: uwsgi.ini
-        { %- if MONGODB_USE_CUSTOM_SSL_CERT % }
+        {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
         - name: mongodb-cert
           secret:
             secretName: mongodb-ca
-        { %- endif % }
+        {%- endif %}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -304,14 +304,14 @@ spec:
               name: settings-cms
             - mountPath: /openedx/config
               name: config
-            { %- if MONGODB_USE_CUSTOM_SSL_CERT % }
+            {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
             - mountPath: /mongo-db-cert/mongodb-ca-cert
               name: mongodb-cert
               subPath: mongodb-ca-cert
             - mountPath: /mongo-db-cert/client-pem
               name: mongodb-cert
               subPath: client-pem
-            { %- endif % }
+            {%- endif %}
           securityContext:
             allowPrivilegeEscalation: false
       volumes:
@@ -324,11 +324,11 @@ spec:
         - name: config
           configMap:
             name: openedx-config
-        { %- if MONGODB_USE_CUSTOM_SSL_CERT % }
+        {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
         - name: mongodb-cert
           secret:
             secretName: mongodb-ca
-        { %- endif % }
+        {%- endif %}
 {% if RUN_ELASTICSEARCH %}
 ---
 apiVersion: apps/v1

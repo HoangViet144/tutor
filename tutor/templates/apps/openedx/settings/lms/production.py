@@ -9,7 +9,7 @@ ALLOWED_HOSTS = [
     FEATURES["PREVIEW_LMS_BASE"],
     "lms",
 ]
-CORS_ORIGIN_WHITELIST.append("{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}")
+CORS_ORIGIN_WHITELIST.append("{% if ENABLE_HTTPS or BEHIND_PROXY %}https{% else %}http{% endif %}://{{ LMS_HOST }}")
 
 {% if ENABLE_HTTPS %}
 # Properly set the "secure" attribute on session/csrf cookies. This is required in
@@ -25,7 +25,7 @@ SESSION_COOKIE_SAMESITE = "Lax"
 {% endif %}
 
 # CMS authentication
-IDA_LOGOUT_URI_LIST.append("{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}/logout/")
+IDA_LOGOUT_URI_LIST.append("{% if ENABLE_HTTPS or BEHIND_PROXY %}https{% else %}http{% endif %}://{{ CMS_HOST }}/logout/")
 
 # Required to display all courses on start page
 SEARCH_SKIP_ENROLLMENT_START_DATE_FILTERING = True
