@@ -63,7 +63,6 @@ def load_full(root: str) -> Config:
     update_with_defaults(config)
     render_full(config)
     hooks.Actions.CONFIG_LOADED.do(deepcopy(config))
-    print(config)
     return config
 
 
