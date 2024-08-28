@@ -244,7 +244,7 @@ def upgrade_obsolete(config: Config) -> None:
         if name in config:
             config[name.replace("ACTIVATE_", "RUN_")] = config.pop(name)
     # Replace nginx by caddy
-    if ("RUN_CADDY" in config) and config["RUN_CADDY"]:
+    if "RUN_CADDY" in config:
         config["ENABLE_WEB_PROXY"] = config.pop("RUN_CADDY")
     if "NGINX_HTTP_PORT" in config:
         config["CADDY_HTTP_PORT"] = config.pop("NGINX_HTTP_PORT")
