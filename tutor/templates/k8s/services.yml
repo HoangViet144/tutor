@@ -1,3 +1,4 @@
+{% if RUN_CADDY %}
 {% if ENABLE_WEB_PROXY %}
 ---
 apiVersion: v1
@@ -38,6 +39,7 @@ spec:
       name: http
   selector:
     app.kubernetes.io/name: caddy
+{% endif %}
 {% endif %}
 ---
 apiVersion: v1

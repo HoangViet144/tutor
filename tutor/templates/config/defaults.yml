@@ -35,8 +35,9 @@ ELASTICSEARCH_SCHEME: "http"
 ELASTICSEARCH_HEAP_SIZE: 1g
 ENABLE_HTTPS: false
 ENABLE_WEB_PROXY: true
+BEHIND_PROXY: false
 JWT_COMMON_AUDIENCE: "openedx"
-JWT_COMMON_ISSUER: "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}/oauth2"
+JWT_COMMON_ISSUER: "{% if ENABLE_HTTPS or BEHIND_PROXY %}https{% else %}http{% endif %}://{{ LMS_HOST }}/oauth2"
 JWT_COMMON_SECRET_KEY: "{{ OPENEDX_SECRET_KEY }}"
 K8S_NAMESPACE: "openedx"
 LANGUAGE_CODE: "en"

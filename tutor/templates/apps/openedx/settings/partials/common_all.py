@@ -12,11 +12,16 @@ mongodb_parameters = {
     "user": {% if MONGODB_USERNAME %}"{{ MONGODB_USERNAME }}"{% else %}None{% endif %},
     "password": {% if MONGODB_PASSWORD %}"{{ MONGODB_PASSWORD }}"{% else %}None{% endif %},
     # Connection/Authentication
-    "connect": False,
+    "connect": True,
     "ssl": {{ MONGODB_USE_SSL }},
+    "tls": {{ MONGODB_USE_SSL }},
     "authsource": "{{ MONGODB_AUTH_SOURCE }}",
     "replicaSet": {% if MONGODB_REPLICA_SET %}"{{ MONGODB_REPLICA_SET }}"{% else %}None{% endif %},
     {% if MONGODB_AUTH_MECHANISM %}"authMechanism": "{{ MONGODB_AUTH_MECHANISM }}",{% endif %}
+    {% if MONGODB_USE_CUSTOM_SSL_CERT %}
+    "tlsCAFile": "/mongo-db-cert/mongodb-ca-cert",
+    "tlsCertificateKeyFile": "/mongo-db-cert/client-pem"
+    {% endif %}
 }
 DOC_STORE_CONFIG = mongodb_parameters
 CONTENTSTORE = {
