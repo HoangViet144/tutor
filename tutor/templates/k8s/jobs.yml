@@ -101,7 +101,7 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: mysql-job
+  name: mysql-jobbbb
   labels:
     app.kubernetes.io/component: job
 spec:
