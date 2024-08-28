@@ -96,12 +96,12 @@ spec:
         secret:
           secretName: mongodb-ca
       {%- endif %}
+{%- if not MYSQL_SKIP_INITIATION %}
 ---
-{%- if MYSQL_SKIP_INITIATION %}
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: mysql-jobbbb
+  name: mysql-job
   labels:
     app.kubernetes.io/component: job
 spec:
