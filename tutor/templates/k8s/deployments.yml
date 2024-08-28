@@ -1,3 +1,4 @@
+{%- if RUN_CADDY %}
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -57,6 +58,7 @@ spec:
           persistentVolumeClaim:
             claimName: caddy
         {%- endif %}
+{%- endif %}
 ---
 apiVersion: apps/v1
 kind: Deployment
