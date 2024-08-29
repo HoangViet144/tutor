@@ -62,7 +62,7 @@ Features
 Quickstart
 ----------
 
-1. Install the `latest stable release <https://github.com/overhangio/tutor/releases>`_ of Tutor
+1. Install SPVN tutor `pip install -e 'git+https://gitlab.com/sp-saas/vn/product-and-engineering/game-products/open-edx/tutor.git#egg=tutor'`
 2. Run ``tutor local launch``
 3. You're done!
 
