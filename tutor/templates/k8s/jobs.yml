@@ -24,12 +24,14 @@ spec:
             name: settings-cms
           - mountPath: /openedx/config
             name: config
+          {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
           - mountPath: /mongo-db-cert/mongodb-ca-cert
             name: mongodb-cert
             subPath: mongodb-ca-cert
           - mountPath: /mongo-db-cert/client-pem
             name: mongodb-cert
             subPath: client-pem
+          {%- endif %}
       volumes:
       - name: settings-lms
         configMap:
@@ -40,9 +42,11 @@ spec:
       - name: config
         configMap:
           name: openedx-config
+      {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
       - name: mongodb-cert
         secret:
           secretName: mongodb-ca
+      {%- endif %}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -69,12 +73,14 @@ spec:
             name: settings-cms
           - mountPath: /openedx/config
             name: config
+          {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
           - mountPath: /mongo-db-cert/mongodb-ca-cert
             name: mongodb-cert
             subPath: mongodb-ca-cert
           - mountPath: /mongo-db-cert/client-pem
             name: mongodb-cert
             subPath: client-pem
+          {%- endif %}
       volumes:
       - name: settings-lms
         configMap:
@@ -85,9 +91,12 @@ spec:
       - name: config
         configMap:
           name: openedx-config
+      {%- if MONGODB_USE_CUSTOM_SSL_CERT %}
       - name: mongodb-cert
         secret:
           secretName: mongodb-ca
+      {%- endif %}
+{%- if not MYSQL_SKIP_INITIATION %}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -102,5 +111,5 @@ spec:
       containers:
       - name: mysql
         image: {{ DOCKER_IMAGE_MYSQL }}
-
+{%- endif %}
 {{ patch("k8s-jobs") }}

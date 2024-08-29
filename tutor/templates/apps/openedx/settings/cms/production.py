@@ -8,10 +8,10 @@ ALLOWED_HOSTS = [
     ENV_TOKENS.get("CMS_BASE"),
     "cms",
 ]
-CORS_ORIGIN_WHITELIST.append("{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ CMS_HOST }}")
+CORS_ORIGIN_WHITELIST.append("{% if ENABLE_HTTPS or BEHIND_PROXY %}https{% else %}http{% endif %}://{{ CMS_HOST }}")
 
 # Authentication
 SOCIAL_AUTH_EDX_OAUTH2_KEY = "{{ CMS_OAUTH2_KEY_SSO }}"
-SOCIAL_AUTH_EDX_OAUTH2_PUBLIC_URL_ROOT = "{% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}"
+SOCIAL_AUTH_EDX_OAUTH2_PUBLIC_URL_ROOT = "{% if ENABLE_HTTPS or BEHIND_PROXY %}https{% else %}http{% endif %}://{{ LMS_HOST }}"
 
 {{ patch("openedx-cms-production-settings") }}

@@ -12,11 +12,16 @@ mongodb_parameters = {
     "user": {% if MONGODB_USERNAME %}"{{ MONGODB_USERNAME }}"{% else %}None{% endif %},
     "password": {% if MONGODB_PASSWORD %}"{{ MONGODB_PASSWORD }}"{% else %}None{% endif %},
     # Connection/Authentication
-    "connect": False,
+    "connect": True,
     "ssl": {{ MONGODB_USE_SSL }},
+    "tls": {{ MONGODB_USE_SSL }},
     "authsource": "{{ MONGODB_AUTH_SOURCE }}",
     "replicaSet": {% if MONGODB_REPLICA_SET %}"{{ MONGODB_REPLICA_SET }}"{% else %}None{% endif %},
     {% if MONGODB_AUTH_MECHANISM %}"authMechanism": "{{ MONGODB_AUTH_MECHANISM }}",{% endif %}
+    {% if MONGODB_USE_CUSTOM_SSL_CERT %}
+    "tlsCAFile": "/mongo-db-cert/mongodb-ca-cert",
+    "tlsCertificateKeyFile": "/mongo-db-cert/client-pem"
+    {% endif %}
 }
 DOC_STORE_CONFIG = mongodb_parameters
 CONTENTSTORE = {
@@ -89,7 +94,7 @@ CACHES = {
 SITE_ID = 2
 
 # Contact addresses
-CONTACT_MAILING_ADDRESS = "{{ PLATFORM_NAME }} - {% if ENABLE_HTTPS %}https{% else %}http{% endif %}://{{ LMS_HOST }}"
+CONTACT_MAILING_ADDRESS = "{{ PLATFORM_NAME }} - {% if ENABLE_HTTPS or BEHIND_PROXY %}https{% else %}http{% endif %}://{{ LMS_HOST }}"
 DEFAULT_FROM_EMAIL = ENV_TOKENS.get("DEFAULT_FROM_EMAIL", ENV_TOKENS["CONTACT_EMAIL"])
 DEFAULT_FEEDBACK_EMAIL = ENV_TOKENS.get("DEFAULT_FEEDBACK_EMAIL", ENV_TOKENS["CONTACT_EMAIL"])
 SERVER_EMAIL = ENV_TOKENS.get("SERVER_EMAIL", ENV_TOKENS["CONTACT_EMAIL"])
